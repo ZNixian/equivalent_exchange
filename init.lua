@@ -1,5 +1,15 @@
 dofile(minetest.get_modpath("equivalent_exchange").."/emcs.lua")
 
+if minetest.get_modpath("buildtest")~=nil then
+	buildtest.canPumpInto["equivalent_exchange:condenser"] = {
+		"from",
+		on_send = function(pos)
+			equivalent_exchange.convert(pos)
+		end
+	}
+	buildtest.pumps.pulls["equivalent_exchange:condenser"] = {"from"}
+end
+
 equivalent_exchange = {
 	convert = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -91,3 +101,5 @@ minetest.register_node("equivalent_exchange:condenser", {
 	end,
 	emc = 500
 })
+
+print("[equivalent_exchange] Mod loaded!")
