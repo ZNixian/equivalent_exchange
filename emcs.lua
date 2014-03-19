@@ -68,7 +68,6 @@ for type, emcset in pairs(emcs) do
 			for tagname, tagvalue in pairs(ornode) do
 				node[tagname] = tagvalue
 			end
-			print(name.."="..emc.."="..dump(node.emc))
 			minetest["register_"..type](":"..prefix..name, node)
 		end
 	end
