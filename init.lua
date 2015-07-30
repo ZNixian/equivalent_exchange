@@ -5,7 +5,7 @@ if minetest.get_modpath("buildtest")~=nil then
 		"from",
 		on_send = function(pos)
 			equivalent_exchange.convert(pos)
-		end
+		end	
 	}
 	buildtest.pumps.pulls["equivalent_exchange:condenser"] = {"from"}
 end
@@ -44,15 +44,14 @@ equivalent_exchange = {
 		return minetest.registered_items[name].emc
 	end,
 	get_formspec = function(emc, target)
-		return "size[8,10]"..
-				"label[5.6,-0.2;Energy Condenser]"..
-				"label[0.7,0.9;Target Item]"..
-				"list[current_name;to;1,0;1,1;]"..
-				"list[current_name;from;0,1.5;8,4;]"..
-				"list[current_player;main;0,6;8,4;]"..
-				"image[3,0;1,1;default_furnace_fire_bg.png^[lowpart:"..
+		return "size[13,13]"..
+				"label[0,0;Energy Condenser]"..
+				"list[current_name;to;0,0.5;1,1;]"..
+				"list[current_name;from;0,1.5;13,7;]"..
+				"list[current_player;main;2.5,9;8,4;]"..
+				"image[5,0;1,1;default_furnace_fire_bg.png^[lowpart:"..
 				(emc/target*100)..":default_furnace_fire_fg.png]"..
-				"label[5,0.5;Current EMC: ".. emc .."\nNeeded EMC: ".. (target - emc).."]"		
+				"label[10.5,0.5;Current EMC: ".. emc .."\nNeeded EMC: ".. (target - emc).."]"		
 	end,
 }
 
@@ -61,12 +60,12 @@ equivalent_exchange = {
 minetest.register_node("equivalent_exchange:condenser", {
 	description = "Energy Condenser",
 	tiles = {
-		"default_chest_top.png^equivalent_exchange_magic.png",
-		"default_chest_top.png^equivalent_exchange_magic.png",
-		"default_chest_side.png^equivalent_exchange_magic.png",
-		"default_chest_side.png^equivalent_exchange_magic.png",
-		"default_chest_side.png^equivalent_exchange_magic.png",
-		"default_chest_front.png^equivalent_exchange_magic.png"
+		"equivalent_exchange_condenser_top.png",
+		"equivalent_exchange_condenser_bottom.png",
+		"equivalent_exchange_condenser_side.png",
+		"equivalent_exchange_condenser_side.png",
+		"equivalent_exchange_condenser_side.png",
+		"equivalent_exchange_condenser_side.png"
 	},
 	paramtype2 = "facedir",
 	groups = {cracky = 2},
@@ -78,7 +77,7 @@ minetest.register_node("equivalent_exchange:condenser", {
 		meta:set_string("infotext", "Energy Condenser")
 		local inv = meta:get_inventory()
 		inv:set_size("to", 1)
-		inv:set_size("from", 8*4)
+		inv:set_size("from", 13*7)
 	end,
 	can_dig = function(pos,player)
 		local meta = minetest.get_meta(pos);
@@ -103,7 +102,15 @@ minetest.register_node("equivalent_exchange:condenser", {
 
 minetest.register_node("equivalent_exchange:alchemical_chest", {
 	description = "Alchemical Chest",
-	--Texturing--
+	tiles = {
+		"equivalent_exchange_alchemical_chest_top.png",
+		"equivalent_exchange_alchemical_chest_bottom.png",
+		"equivalent_exchange_alchemical_chest_side.png",
+		"equivalent_exchange_alchemical_chest_side.png",
+		"equivalent_exchange_alchemical_chest_side.png",
+		"equivalent_exchange_alchemical_chest_front.png",
+
+	},
 	paramtype2 = "facedir",
 	groups = {cracky = 2},
 	is_ground_content = false,
@@ -118,7 +125,6 @@ minetest.register_node("equivalent_exchange:alchemical_chest", {
 		meta:set_string("infotext", "Alchemical Chest")
 		local inv = meta:get_inventory()
 		inv:set_size("container", 13*8)
-		inv:set_size("main", 8*4)
 	end,
 	can_dig = function(pos,player)
 		local meta = minetest.env:get_meta(pos);
@@ -167,23 +173,21 @@ minetest.register_craftitem("equivalent_exchange:book_of_power_1", {
 	emc = 1200,
 })
 
-minetest.register_craftitem("equivalent_exchange:emc", {
-	description = "EMC Matter",
-	emc = 100,
-})
-
 minetest.register_craftitem("equivalent_exchange:low_covalence", {
 	description = "Low Covalence Dust",
+	inventory_image = "equivalent_exchange_low_covalence.png",
 	emc = 1,
 })
 
 minetest.register_craftitem("equivalent_exchange:medium_covalence", {
 	description = "Medium Covalence Dust",
+	inventory_image = "equivalent_exchange_medium_covalence.png",
 	emc = 8,
 })
 
 minetest.register_craftitem("equivalent_exchange:high_covalence", {
 	description = "High Covalence Dust",
+	inventory_image = "equivalent_exchange_high_covalence.png",
 	emc = 208,
 })
 
