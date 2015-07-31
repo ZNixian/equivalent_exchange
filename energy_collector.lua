@@ -58,7 +58,14 @@ minetest.register_abm({
 
 minetest.register_node("equivalent_exchange:energy_collector_mk1", {
 	description = "Energy Collector Mark 1",
-	--Texturing--
+	tiles = {
+		"equivalent_exchange_energy_collector_mk1_top.png",
+		"equivalent_exchange_energy_collector_mk1_bottom.png",
+		"equivalent_exchange_energy_collector_mk1_side.png",
+		"equivalent_exchange_energy_collector_mk1_side.png",
+		"equivalent_exchange_energy_collector_mk1_side.png",
+		"equivalent_exchange_energy_collector_mk1_side.png",
+	},
 	paramtype2 = "facedir",
 	groups = {cracky = 2},
 	is_ground_content = false,
@@ -84,6 +91,7 @@ minetest.register_node("equivalent_exchange:energy_collector_mk1", {
 })
 
 -- Registering Crafts --
+
 minetest.register_craft({
 	output = "equivalent_exchange:energy_collector_mk1",
 	recipe = {

@@ -10,14 +10,13 @@ minetest.register_node("equivalent_exchange:alchemical_chest", {
 		"equivalent_exchange_alchemical_chest_side.png",
 		"equivalent_exchange_alchemical_chest_side.png",
 		"equivalent_exchange_alchemical_chest_front.png",
-
 	},
 	paramtype2 = "facedir",
 	groups = {cracky = 2},
 	is_ground_content = false,
 	sounds = default.node_sound_stone_defaults(),
 	on_construct = function(pos)
-	local meta = minetest.get_meta(pos)
+		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec",
 			"size[13,13]"..
 			"label[0,0;Alchemical Chest]"..

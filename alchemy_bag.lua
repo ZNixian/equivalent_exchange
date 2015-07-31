@@ -226,3 +226,4 @@ minetest.register_craft({
 		{"wool:violet", "wool:violet", "wool:violet"}
 	}
 })
+
