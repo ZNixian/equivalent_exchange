@@ -50,7 +50,7 @@ minetest.register_abm({
 			"label[4,0;EMC Stored: "..collector.emc_gather(emc,1).."]"..
 			"list[current_name;container;0,0.5;6,1;]")
 		meta:set_int("emc",collector.emc_gather(emc,1))
-		collector.emc_transfer(1,pos,emc)
+		collector.emc_transfer(1,pos)
 	end,
 })
 
