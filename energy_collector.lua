@@ -1,11 +1,10 @@
 collector = {
-	emc_gather = function(orig_emc, mark)
-		return orig_emc + (10^(mark - 1))
+	emc_gather = function(orig_emc, mark,multiplier)
+		return orig_emc + (10^(mark - 1)) * multiplier
 	end,
-	emc_transfer = function(mark,pos)
+	emc_transfer = function(mark,pos,multiplier)
 		local meta = minetest.get_meta(pos)
 		local emc = meta:get_int("emc")
-		local newemc = (collector.emc_gather(emc, mark))
 		local surrounding_nodes = {
 			minetest.get_meta({x = pos.x + 1, y = pos.y, z = pos.z}),
 			minetest.get_meta({x = pos.x - 1,  y = pos.y, z = pos.z}),
@@ -22,6 +21,7 @@ collector = {
 				emc_transferable_nodes_length = emc_transferable_nodes_length + 1
 			end
 		end
+		local newemc = (collector.emc_gather(emc, mark, multiplier))
 		local distribution = math.floor(newemc / emc_transferable_nodes_length)
 		for j = 1,emc_transferable_nodes_length do
 			meta:set_string("formspec",
@@ -32,6 +32,13 @@ collector = {
 			meta:set_int("emc",(newemc - distribution))
 			emc_transferable_nodes[j]:set_int("emc", (emc_transferable_nodes[j]:get_int("emc") + distribution))
 		end
+	end,
+	check_multiplier = function(pos)
+		local multiplier = 1
+		if minetest.get_meta({x = pos.x, y = pos.y + 1, z = pos.z}):get_int("multiplier") == 2 then
+			multiplier = 2
+		end
+		return multiplier
 	end,
 }
 
@@ -44,13 +51,14 @@ minetest.register_abm({
 	action = function(pos, node, active_object_count, active_object_count_wider)	
 		local meta = minetest.get_meta(pos)
 		local emc = meta:get_int("emc")
+		local multiplier = collector.check_multiplier(pos)
 		meta:set_string("formspec",
 			"size[6,1.5]"..
 			"label[0,0;Energy Collector Mark 1]"..
-			"label[4,0;EMC Stored: "..collector.emc_gather(emc,1).."]"..
+			"label[4,0;EMC Stored: "..collector.emc_gather(emc,1,multiplier).."]"..
 			"list[current_name;container;0,0.5;6,1;]")
-		meta:set_int("emc",collector.emc_gather(emc,1))
-		collector.emc_transfer(1,pos)
+		meta:set_int("emc",collector.emc_gather(emc,1,multiplier))
+		collector.emc_transfer(1,pos,multiplier)
 	end,
 })
 
@@ -61,13 +69,14 @@ minetest.register_abm({
 	action = function(pos, node, active_object_count, active_object_count_wider)	
 		local meta = minetest.get_meta(pos)
 		local emc = meta:get_int("emc")
+		local multiplier = collector.check_multiplier(pos)
 		meta:set_string("formspec",
 			"size[6,1.5]"..
 			"label[0,0;Energy Collector Mark 2]"..
-			"label[4,0;EMC Stored: "..collector.emc_gather(emc,2).."]"..
+			"label[4,0;EMC Stored: "..collector.emc_gather(emc,2,multiplier).."]"..
 			"list[current_name;container;0,0.5;6,1;]")
-		meta:set_int("emc",collector.emc_gather(emc,2))
-		collector.emc_transfer(2,pos)
+		meta:set_int("emc",collector.emc_gather(emc,2,multiplier))
+		collector.emc_transfer(2,pos,multiplier)
 	end,
 })
 
@@ -78,13 +87,14 @@ minetest.register_abm({
 	action = function(pos, node, active_object_count, active_object_count_wider)	
 		local meta = minetest.get_meta(pos)
 		local emc = meta:get_int("emc")
+		local multiplier = collector.check_multiplier(pos)
 		meta:set_string("formspec",
 			"size[6,1.5]"..
 			"label[0,0;Energy Collector Mark 3]"..
-			"label[4,0;EMC Stored: "..collector.emc_gather(emc,3).."]"..
+			"label[4,0;EMC Stored: "..collector.emc_gather(emc,3,multiplier).."]"..
 			"list[current_name;container;0,0.5;6,1;]")
-		meta:set_int("emc",collector.emc_gather(emc,3))
-		collector.emc_transfer(3,pos)
+		meta:set_int("emc",collector.emc_gather(emc,3,multiplier))
+		collector.emc_transfer(3,pos,multiplier)
 	end,
 })
 
@@ -106,15 +116,15 @@ minetest.register_node("equivalent_exchange:energy_collector_mk1", {
 	sounds = default.node_sound_stone_defaults(),
 	on_construct = function(pos)
 	local meta = minetest.get_meta(pos)
-		meta:set_string("formspec",
-			"size[6,1.5]"..
-			"label[0,0;Energy Collector Mark 1]"..
-			"label[4,0;EMC Stored: 0]"..
-			"list[current_name;container;0,0.5;6,1;]")
-		meta:set_string("infotext", "Energy Collector Mark 1")
-		meta:set_int("emc", 0)
-		local inv = meta:get_inventory()
-		inv:set_size("container", 6)
+	meta:set_string("formspec",
+		"size[6,1.5]"..
+		"label[0,0;Energy Collector Mark 1]"..
+		"label[4,0;EMC Stored: 0]"..
+		"list[current_name;container;0,0.5;6,1;]")
+	meta:set_string("infotext", "Energy Collector Mark 1")
+	meta:set_int("emc", 0)
+	local inv = meta:get_inventory()
+	inv:set_size("container", 6)
 	end,
 	can_dig = function(pos,player)
 		local meta = minetest.env:get_meta(pos);
@@ -140,15 +150,15 @@ minetest.register_node("equivalent_exchange:energy_collector_mk2", {
 	sounds = default.node_sound_stone_defaults(),
 	on_construct = function(pos)
 	local meta = minetest.get_meta(pos)
-		meta:set_string("formspec",
-			"size[6,1.5]"..
-			"label[0,0;Energy Collector Mark 2]"..
-			"label[4,0;EMC Stored: 0]"..
-			"list[current_name;container;0,0.5;6,1;]")
-		meta:set_string("infotext", "Energy Collector Mark 2")
-		meta:set_int("emc", 0)
-		local inv = meta:get_inventory()
-		inv:set_size("container", 6)
+	meta:set_string("formspec",
+		"size[6,1.5]"..
+		"label[0,0;Energy Collector Mark 2]"..
+		"label[4,0;EMC Stored: 0]"..
+		"list[current_name;container;0,0.5;6,1;]")
+	meta:set_string("infotext", "Energy Collector Mark 2")
+	meta:set_int("emc", 0)
+	local inv = meta:get_inventory()
+	inv:set_size("container", 6)
 	end,
 	can_dig = function(pos,player)
 		local meta = minetest.env:get_meta(pos);
@@ -174,15 +184,15 @@ minetest.register_node("equivalent_exchange:energy_collector_mk3", {
 	sounds = default.node_sound_stone_defaults(),
 	on_construct = function(pos)
 	local meta = minetest.get_meta(pos)
-		meta:set_string("formspec",
-			"size[6,1.5]"..
-			"label[0,0;Energy Collector Mark 3]"..
-			"label[4,0;EMC Stored: 0]"..
-			"list[current_name;container;0,0.5;6,1;]")
-		meta:set_string("infotext", "Energy Collector Mark 3")
-		meta:set_int("emc", 0)
-		local inv = meta:get_inventory()
-		inv:set_size("container", 6)
+	meta:set_string("formspec",
+		"size[6,1.5]"..
+		"label[0,0;Energy Collector Mark 3]"..
+		"label[4,0;EMC Stored: 0]"..
+		"list[current_name;container;0,0.5;6,1;]")
+	meta:set_string("infotext", "Energy Collector Mark 3")
+	meta:set_int("emc", 0)
+	local inv = meta:get_inventory()
+	inv:set_size("container", 6)
 	end,
 	can_dig = function(pos,player)
 		local meta = minetest.env:get_meta(pos);
@@ -191,6 +201,28 @@ minetest.register_node("equivalent_exchange:energy_collector_mk3", {
 	end,
 	emc = 529605
 })
+
+minetest.register_node("equivalent_exchange:interdiction_stone", {
+	description = "Interdiction Stone",
+	tiles = {
+		"equivalent_exchange_interdiction_stone.png",
+		"equivalent_exchange_interdiction_stone.png",
+		"equivalent_exchange_interdiction_stone.png",
+		"equivalent_exchange_interdiction_stone.png",
+		"equivalent_exchange_interdiction_stone.png",
+		"equivalent_exchange_interdiction_stone.png"
+	},
+	paramtype2 = "facedir",
+	groups = {cracky = 1},
+	is_ground_content = false,
+	sounds = default.node_sound_stone_defaults(),
+	light_source = 10,
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		meta:set_int("multiplier", 2)
+	end,
+})
+
 -- Registering Crafts --
 
 minetest.register_craft({
@@ -217,5 +249,14 @@ minetest.register_craft({
 		{"default:mese", "equivalent_exchange:antimatter", "default:mese"},
 		{"default:mese", "equivalent_exchange:energy_collector_mk2", "default:mese"},
 		{"default:mese", "default:mese", "default:mese"}
+	}
+})
+
+minetest.register_craft({
+	output = "equivalent_exchange:interdiction_stone",
+	recipe = {
+		{"default:torch", "equivalent_exchange:aeternalis_fuel", "default:torch"},
+		{"equivalent_exchange:aeternalis_fuel", "equivalent_exchange:philosophers_stone", "equivalent_exchange:aeternalis_fuel"},
+		{"equivalent_exchange:high_covalence", "equivalent_exchange:high_covalence", "equivalent_exchange:high_covalence"}
 	}
 })
