@@ -1,23 +1,11 @@
-emc_gather = function(orig_emc, type)
-	return orig_emc + (10^(type - 1))
-end
-
--- Registering ABMs --
-
-minetest.register_abm({
-	nodenames = {"equivalent_exchange:energy_collector_mk1"},
-	interval = 1.0,
-	chance = 1,
-	action = function(pos, node, active_object_count, active_object_count_wider)	
+collector = {
+	emc_gather = function(orig_emc, type)
+		return orig_emc + (10^(type - 1))
+	end,
+	emc_transfer = function(mark,pos)
 		local meta = minetest.get_meta(pos)
-			local emc = meta:get_int("emc")
-			meta:set_string("formspec",
-				"size[6,1.5]"..
-				"label[0,0;Energy Collector Mark 1]"..
-				"label[4,0;EMC Stored: "..emc_gather(emc,1).."]"..
-				"list[current_name;container;0,0.5;6,1;]")
-			meta:set_int("emc",emc_gather(emc,1))
-		local newemc = (emc_gather(emc,1))
+		local emc = meta:get_int("emc")
+		local newemc = (collector.emc_gather(emc, 1))
 		local surrounding_nodes = {
 			minetest.get_meta({x = pos.x + 1, y = pos.y, z = pos.z}),
 			minetest.get_meta({x = pos.x - 1,  y = pos.y, z = pos.z}),
@@ -38,12 +26,31 @@ minetest.register_abm({
 		for j = 1,emc_transferable_nodes_length do
 			meta:set_string("formspec",
 				"size[6,1.5]"..
-				"label[0,0;Energy Collector Mark 1]"..
+				"label[0,0;Energy Collector Mark"..mark.."]"..
 				"label[4,0;EMC Stored: "..(newemc - distribution).."]"..
 				"list[current_name;container;0,0.5;6,1;]")
 			meta:set_int("emc",(newemc - distribution))
 			emc_transferable_nodes[j]:set_int("emc", (emc_transferable_nodes[j]:get_int("emc") + distribution))
 		end
+	end,
+}
+
+-- Registering ABMs --
+
+minetest.register_abm({
+	nodenames = {"equivalent_exchange:energy_collector_mk1"},
+	interval = 1.0,
+	chance = 1,
+	action = function(pos, node, active_object_count, active_object_count_wider)	
+		local meta = minetest.get_meta(pos)
+		local emc = meta:get_int("emc")
+		meta:set_string("formspec",
+			"size[6,1.5]"..
+			"label[0,0;Energy Collector Mark 1]"..
+			"label[4,0;EMC Stored: "..collector.emc_gather(emc,1).."]"..
+			"list[current_name;container;0,0.5;6,1;]")
+		meta:set_int("emc",collector.emc_gather(emc,1))
+		collector.emc_transfer(1,pos,emc)
 	end,
 })
 
