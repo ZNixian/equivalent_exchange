@@ -1,16 +1,16 @@
 local emcs = {
 	node = {
 		["default:"] = {
-			["stone"] = 1,
-			["cobble"] = 1,
-			["desert_stone"] = 1,
-			["stonebrick"] = 1,
-			["desert_stonebrick"] = 1,
-			["dirt_with_grass"] = 1,
-			["dirt_with_snow"] = 1,
+			stone = 2,
+			cobble = 1,
+			desert_stone = 1,
+			stonebrick = 1,
+			desert_stonebrick = 1,
+			dirt_with_grass = 50,
+			dirt_with_snow = 50,
 			dirt = 1,
 			sand=1,
-			["desert_sand"] = 1,
+			desert_sand = 1,
 			gravel = 4,
 			sandstone = 4,
 			sandstonebrick = 4,
@@ -42,15 +42,38 @@ local emcs = {
 			stick = 2,
 			paper = 96,
 			book = 288,
-			coal_lump = 128,
-			mese_crystal = 8442,
-			diamond = 8192,
+
+			-- Old Value: 128
+			-- Precise Value: 57
+			coal_lump = 55,
+
+			-- Old Value: 8442
+			-- Precise Value: 420 (including blocks)
+			mese_crystal = 425,
+
+			-- Old Value: 8192
+			-- Precise Value: 848
+			diamond = 850,
 			clay_lump = 16,
-			steel_ingot = 256,
-			copper_ingot = 85,
-			bronze_ingot = 255,
-			gold_ingot = 2048,
-			mese_crystal_fragment = 938,
+
+			-- Old Value: 256
+			-- Precise Value (of lump): 61
+			steel_ingot = 90,
+
+			-- Old Value: 85
+			-- Precise Value (of lump): 146
+			copper_ingot = 225,
+
+			--Old Value: 255
+			bronze_ingot = 90 + 225,
+
+			-- Old Value: 2048
+			-- Precise Value (of lump): 442
+			gold_ingot = 675,
+
+			-- Old Value: 938
+			-- Precise Value: 47
+			mese_crystal_fragment = 25,
 			clay_brick = 16,
 		}
 	}
