@@ -1,4 +1,3 @@
-
 -- Registering Craft Items --
 
 minetest.register_craftitem("equivalent_exchange:alchemy_bag_white", {

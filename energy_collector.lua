@@ -1,9 +1,9 @@
-
 emc_gather = function(orig_emc, type)
 	return orig_emc + (10^(type - 1))
-end,
+end
 
 -- Registering ABMs --
+
 minetest.register_abm({
 	nodenames = {"equivalent_exchange:energy_collector_mk1"},
 	interval = 1.0,
@@ -17,6 +17,33 @@ minetest.register_abm({
 				"label[4,0;EMC Stored: "..emc_gather(emc,1).."]"..
 				"list[current_name;container;0,0.5;6,1;]")
 			meta:set_int("emc",emc_gather(emc,1))
+		local newemc = (emc_gather(emc,1))
+		local surrounding_nodes = {
+			minetest.get_meta({x = pos.x + 1, y = pos.y, z = pos.z}),
+			minetest.get_meta({x = pos.x - 1,  y = pos.y, z = pos.z}),
+			minetest.get_meta({x = pos.x, y = pos.y + 1, z = pos.z}),
+			minetest.get_meta({x = pos.x, y = pos.y - 1, z = pos.z}),
+			minetest.get_meta({x = pos.x, y = pos.y, z = pos.z + 1}),
+			minetest.get_meta({x = pos.x, y = pos.y, z = pos.z - 1})
+		}
+		local emc_transferable_nodes = {}
+		local emc_transferable_nodes_length = 0
+		for i = 1,6 do
+			if surrounding_nodes[i]:get_string("emc_storable") == "true" then
+				table.insert(emc_transferable_nodes,surrounding_nodes[i])
+				emc_transferable_nodes_length = emc_transferable_nodes_length + 1
+			end
+		end
+		local distribution = math.floor(newemc / emc_transferable_nodes_length)
+		for j = 1,emc_transferable_nodes_length do
+			meta:set_string("formspec",
+				"size[6,1.5]"..
+				"label[0,0;Energy Collector Mark 1]"..
+				"label[4,0;EMC Stored: "..(newemc - distribution).."]"..
+				"list[current_name;container;0,0.5;6,1;]")
+			meta:set_int("emc",(newemc - distribution))
+			emc_transferable_nodes[j]:set_int("emc", (emc_transferable_nodes[j]:get_int("emc") + distribution))
+		end
 	end,
 })
 
