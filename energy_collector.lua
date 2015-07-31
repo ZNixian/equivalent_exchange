@@ -98,6 +98,24 @@ minetest.register_abm({
 	end,
 })
 
+minetest.register_abm({
+	nodenames = {"equivalent_exchange:antimatter_collector"},
+	interval = 1.0,
+	chance = 1,
+	action = function(pos, node, active_object_count, active_object_count_wider)	
+		local meta = minetest.get_meta(pos)
+		local emc = meta:get_int("emc")
+		local multiplier = collector.check_multiplier(pos)
+		meta:set_string("formspec",
+			"size[6,1.5]"..
+			"label[0,0;Antimatter Collector]"..
+			"label[4,0;EMC Stored: "..collector.emc_gather(emc,4,multiplier).."]"..
+			"list[current_name;container;0,0.5;6,1;]")
+		meta:set_int("emc",collector.emc_gather(emc,4,multiplier))
+		collector.emc_transfer(4,pos,multiplier)
+	end,
+})
+
 -- Registering Nodes --
 
 minetest.register_node("equivalent_exchange:energy_collector_mk1", {
@@ -202,6 +220,40 @@ minetest.register_node("equivalent_exchange:energy_collector_mk3", {
 	emc = 529605
 })
 
+minetest.register_node("equivalent_exchange:antimatter_collector", {
+	description = "Antimatter Collector",
+	tiles = {
+		"equivalent_exchange_antimatter_collector_top.png",
+		"equivalent_exchange_antimatter_collector_bottom.png",
+		"equivalent_exchange_antimatter_collector_side.png",
+		"equivalent_exchange_antimatter_collector_side.png",
+		"equivalent_exchange_antimatter_collector_side.png",
+		"equivalent_exchange_antimatter_collector_side.png",
+	},
+	paramtype2 = "facedir",
+	groups = {cracky = 2},
+	is_ground_content = false,
+	sounds = default.node_sound_stone_defaults(),
+	on_construct = function(pos)
+	local meta = minetest.get_meta(pos)
+	meta:set_string("formspec",
+		"size[6,1.5]"..
+		"label[0,0;Antimatter Collector]"..
+		"label[4,0;EMC Stored: 0]"..
+		"list[current_name;container;0,0.5;6,1;]")
+	meta:set_string("infotext", "Antimatter Collector")
+	meta:set_int("emc", 0)
+	local inv = meta:get_inventory()
+	inv:set_size("container", 6)
+	end,
+	can_dig = function(pos,player)
+		local meta = minetest.env:get_meta(pos);
+		local inv = meta:get_inventory()
+		return inv:is_empty("main")
+	end,
+	emc = 269554885
+})
+
 minetest.register_node("equivalent_exchange:interdiction_stone", {
 	description = "Interdiction Stone",
 	tiles = {
@@ -258,5 +310,17 @@ minetest.register_craft({
 		{"default:torch", "equivalent_exchange:aeternalis_fuel", "default:torch"},
 		{"equivalent_exchange:aeternalis_fuel", "equivalent_exchange:philosophers_stone", "equivalent_exchange:aeternalis_fuel"},
 		{"equivalent_exchange:high_covalence", "equivalent_exchange:high_covalence", "equivalent_exchange:high_covalence"}
+	},
+	replacements = {
+		{"equivalent_exchange:philosophers_stone", "equivalent_exchange:philosophers_stone"}
+	}
+})
+
+minetest.register_craft({
+	output = "equivalent_exchange:antimatter_collector",
+	recipe = {
+		{"equivalent_exchange:condensed_antimatter", "equivalent_exchange:condensed_antimatter", "equivalent_exchange:condensed_antimatter"},
+		{"equivalent_exchange:condensed_antimatter", "equivalent_exchange:energy_collector_mk3", "equivalent_exchange:condensed_antimatter"},
+		{"equivalent_exchange:condensed_antimatter", "equivalent_exchange:condensed_antimatter", "equivalent_exchange:condensed_antimatter"}
 	}
 })

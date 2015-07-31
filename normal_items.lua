@@ -1,3 +1,56 @@
+-- Registering Nodes --
+
+minetest.register_node("equivalent_exchange:red_matter_block", {
+	description = "Red Matter Block",
+	tiles = {
+		"equivalent_exchange_red_matter_block.png",
+		"equivalent_exchange_red_matter_block.png",
+		"equivalent_exchange_red_matter_block.png",
+		"equivalent_exchange_red_matter_block.png",
+		"equivalent_exchange_red_matter_block.png",
+		"equivalent_exchange_red_matter_block.png"
+	},
+	paramtype2 = "facedir",
+	groups = {cracky = 3},
+	is_ground_content = false,
+	sounds = default.node_sound_stone_defaults(),
+	emc = 1253376
+})
+
+minetest.register_node("equivalent_exchange:antimatter_block", {
+	description = "Antimatter Block",
+	tiles = {
+		"equivalent_exchange_antimatter_block.png",
+		"equivalent_exchange_antimatter_block.png",
+		"equivalent_exchange_antimatter_block.png",
+		"equivalent_exchange_antimatter_block.png",
+		"equivalent_exchange_antimatter_block.png",
+		"equivalent_exchange_antimatter_block.png"
+	},
+	paramtype2 = "facedir",
+	groups = {cracky = 3},
+	is_ground_content = false,
+	sounds = default.node_sound_stone_defaults(),
+	emc = 4202496
+})
+
+minetest.register_node("equivalent_exchange:condensed_antimatter", {
+	description = "Condensed Antimatter",
+	tiles = {
+		"equivalent_exchange_condensed_antimatter.png",
+		"equivalent_exchange_condensed_antimatter.png",
+		"equivalent_exchange_condensed_antimatter.png",
+		"equivalent_exchange_condensed_antimatter.png",
+		"equivalent_exchange_condensed_antimatter.png",
+		"equivalent_exchange_condensed_antimatter.png"
+	},
+	paramtype2 = "facedir",
+	groups = {cracky = 5},
+	is_ground_content = false,
+	sounds = default.node_sound_stone_defaults(),
+	emc = 33628160
+})
+
 -- Registering Craft Items --
 
 minetest.register_craftitem("equivalent_exchange:alchemical_crystal", {
@@ -21,13 +74,13 @@ minetest.register_craftitem("equivalent_exchange:aeternalis_fuel", {
 minetest.register_craftitem("equivalent_exchange:red_matter", {
 	description = "Red Matter",
 	inventory_image = "equivalent_exchange_red_matter.png",
-	emc = 139,264
+	emc = 139264
 })
 
 minetest.register_craftitem("equivalent_exchange:antimatter", {
 	description = "Antimatter",
 	inventory_image = "equivalent_exchange_antimatter.png",
-	emc = 466,944
+	emc = 466944
 })
 
 -- Registering Crafts --
@@ -71,6 +124,29 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = "equivalent_exchange:red_matter_block",
+	recipe = {
+		{"equivalent_exchange:red_matter", "equivalent_exchange:red_matter", "equivalent_exchange:red_matter"},
+		{"equivalent_exchange:red_matter", "equivalent_exchange:red_matter", "equivalent_exchange:red_matter"},
+		{"equivalent_exchange:red_matter", "equivalent_exchange:red_matter", "equivalent_exchange:red_matter"}
+	}
+})
 
+minetest.register_craft({
+	output = "equivalent_exchange:antimatter_block",
+	recipe = {
+		{"equivalent_exchange:antimatter", "equivalent_exchange:antimatter", "equivalent_exchange:antimatter"},
+		{"equivalent_exchange:antimatter", "equivalent_exchange:antimatter", "equivalent_exchange:antimatter"},
+		{"equivalent_exchange:antimatter", "equivalent_exchange:antimatter", "equivalent_exchange:antimatter"}
+	}
+})
 
-
+minetest.register_craft({
+	output = "equivalent_exchange:condensed_antimatter",
+	recipe = {
+		{"equivalent_exchange:antimatter_block", "equivalent_exchange:antimatter_block", "equivalent_exchange:antimatter_block"},
+		{"equivalent_exchange:antimatter_block", "equivalent_exchange:aeternalis_fuel", "equivalent_exchange:antimatter_block"},
+		{"equivalent_exchange:antimatter_block", "equivalent_exchange:antimatter_block", "equivalent_exchange:antimatter_block"}
+	}
+})
