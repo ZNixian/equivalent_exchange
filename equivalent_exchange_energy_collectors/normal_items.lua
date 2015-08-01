@@ -1,6 +1,8 @@
+local modname = "equivalent_exchange_energy_collectors:"
+
 -- Registering Nodes --
 
-minetest.register_node("equivalent_exchange_energy_collectors:red_matter_block", {
+minetest.register_node(modname.."red_matter_block", {
 	description = "Red Matter Block",
 	tiles = {
 		"equivalent_exchange_red_matter_block.png",
@@ -17,7 +19,7 @@ minetest.register_node("equivalent_exchange_energy_collectors:red_matter_block",
 	emc = 1253376
 })
 
-minetest.register_node("equivalent_exchange_energy_collectors:antimatter_block", {
+minetest.register_node(modname.."antimatter_block", {
 	description = "Antimatter Block",
 	tiles = {
 		"equivalent_exchange_antimatter_block.png",
@@ -34,7 +36,7 @@ minetest.register_node("equivalent_exchange_energy_collectors:antimatter_block",
 	emc = 4202496
 })
 
-minetest.register_node("equivalent_exchange_energy_collectors:condensed_antimatter", {
+minetest.register_node(modname.."condensed_antimatter", {
 	description = "Condensed Antimatter",
 	tiles = {
 		"equivalent_exchange_condensed_antimatter.png",
@@ -53,31 +55,31 @@ minetest.register_node("equivalent_exchange_energy_collectors:condensed_antimatt
 
 -- Registering Craft Items --
 
-minetest.register_craftitem("equivalent_exchange_energy_collectors:alchemical_crystal", {
+minetest.register_craftitem(modname.."alchemical_crystal", {
 	description = "Alchemical Crystal",
 	inventory_image = "equivalent_exchange_alchemical_crystal.png",
 	emc = 512,
 })
 
-minetest.register_craftitem("equivalent_exchange_energy_collectors:mobius_fuel", {
+minetest.register_craftitem(modname.."mobius_fuel", {
 	description = "Mobius Fuel",
 	inventory_image = "equivalent_exchange_mobius_fuel.png",
 	emc = 2048,
 })
 
-minetest.register_craftitem("equivalent_exchange_energy_collectors:aeternalis_fuel", {
+minetest.register_craftitem(modname.."aeternalis_fuel", {
 	description = "Aeternalis Fuel",
 	inventory_image = "equivalent_exchange_aeternalis_fuel.png",
 	emc = 8192,
 })
 
-minetest.register_craftitem("equivalent_exchange_energy_collectors:red_matter", {
+minetest.register_craftitem(modname.."red_matter", {
 	description = "Red Matter",
 	inventory_image = "equivalent_exchange_red_matter.png",
 	emc = 139264
 })
 
-minetest.register_craftitem("equivalent_exchange_energy_collectors:antimatter", {
+minetest.register_craftitem(modname.."antimatter", {
 	description = "Antimatter",
 	inventory_image = "equivalent_exchange_antimatter.png",
 	emc = 466944
@@ -85,7 +87,7 @@ minetest.register_craftitem("equivalent_exchange_energy_collectors:antimatter", 
 
 -- Registering Crafts --
 
-local fuels = {"default:diamond","equivalent_exchange_energy_collectors:alchemical_crystal","equivalent_exchange_energy_collectors:mobius_fuel","equivalent_exchange_energy_collectors:aeternalis_fuel"}
+local fuels = {"default:diamond",modname.."alchemical_crystal",modname.."mobius_fuel",modname.."aeternalis_fuel"}
 
 for i = 2,4 do
 	minetest["register_craft"]({
@@ -107,46 +109,46 @@ for i = 2,4 do
 end
 
 minetest.register_craft({
-	output = "equivalent_exchange_energy_collectors:red_matter",
+	output = modname.."red_matter",
 	recipe = {
-		{"equivalent_exchange_energy_collectors:aeternalis_fuel", "equivalent_exchange_energy_collectors:aeternalis_fuel", "equivalent_exchange_energy_collectors:aeternalis_fuel"},
-		{"equivalent_exchange_energy_collectors:aeternalis_fuel", "default:mese", "equivalent_exchange_energy_collectors:aeternalis_fuel"},
-		{"equivalent_exchange_energy_collectors:aeternalis_fuel", "equivalent_exchange_energy_collectors:aeternalis_fuel", "equivalent_exchange_energy_collectors:aeternalis_fuel"}
+		{modname.."aeternalis_fuel", modname.."aeternalis_fuel", modname.."aeternalis_fuel"},
+		{modname.."aeternalis_fuel", "default:mese", modname.."aeternalis_fuel"},
+		{modname.."aeternalis_fuel", modname.."aeternalis_fuel", modname.."aeternalis_fuel"}
 	}
 })
 
 minetest.register_craft({
-	output = "equivalent_exchange_energy_collectors:antimatter",
+	output = modname.."antimatter",
 	recipe = {
-		{"equivalent_exchange_energy_collectors:aeternalis_fuel", "equivalent_exchange_energy_collectors:aeternalis_fuel", "equivalent_exchange_energy_collectors:aeternalis_fuel"},
-		{"equivalent_exchange_energy_collectors:red_matter","equivalent_exchange_energy_collectors:red_matter","equivalent_exchange_energy_collectors:red_matter"},
-		{"equivalent_exchange_energy_collectors:aeternalis_fuel", "equivalent_exchange_energy_collectors:aeternalis_fuel", "equivalent_exchange_energy_collectors:aeternalis_fuel"}
+		{modname.."aeternalis_fuel", modname.."aeternalis_fuel", modname.."aeternalis_fuel"},
+		{modname.."red_matter",modname.."red_matter",modname.."red_matter"},
+		{modname.."aeternalis_fuel", modname.."aeternalis_fuel", modname.."aeternalis_fuel"}
 	}
 })
 
 minetest.register_craft({
-	output = "equivalent_exchange_energy_collectors:red_matter_block",
+	output = modname.."red_matter_block",
 	recipe = {
-		{"equivalent_exchange_energy_collectors:red_matter", "equivalent_exchange_energy_collectors:red_matter", "equivalent_exchange_energy_collectors:red_matter"},
-		{"equivalent_exchange_energy_collectors:red_matter", "equivalent_exchange_energy_collectors:red_matter", "equivalent_exchange_energy_collectors:red_matter"},
-		{"equivalent_exchange_energy_collectors:red_matter", "equivalent_exchange_energy_collectors:red_matter", "equivalent_exchange_energy_collectors:red_matter"}
+		{modname.."red_matter", modname.."red_matter", modname.."red_matter"},
+		{modname.."red_matter", modname.."red_matter", modname.."red_matter"},
+		{modname.."red_matter", modname.."red_matter", modname.."red_matter"}
 	}
 })
 
 minetest.register_craft({
-	output = "equivalent_exchange_energy_collectors:antimatter_block",
+	output = modname.."antimatter_block",
 	recipe = {
-		{"equivalent_exchange_energy_collectors:antimatter", "equivalent_exchange_energy_collectors:antimatter", "equivalent_exchange_energy_collectors:antimatter"},
-		{"equivalent_exchange_energy_collectors:antimatter", "equivalent_exchange_energy_collectors:antimatter", "equivalent_exchange_energy_collectors:antimatter"},
-		{"equivalent_exchange_energy_collectors:antimatter", "equivalent_exchange_energy_collectors:antimatter", "equivalent_exchange_energy_collectors:antimatter"}
+		{modname.."antimatter", modname.."antimatter", modname.."antimatter"},
+		{modname.."antimatter", modname.."antimatter", modname.."antimatter"},
+		{modname.."antimatter", modname.."antimatter", modname.."antimatter"}
 	}
 })
 
 minetest.register_craft({
-	output = "equivalent_exchange_energy_collectors:condensed_antimatter",
+	output = modname.."condensed_antimatter",
 	recipe = {
-		{"equivalent_exchange_energy_collectors:antimatter_block", "equivalent_exchange_energy_collectors:antimatter_block", "equivalent_exchange_energy_collectors:antimatter_block"},
-		{"equivalent_exchange_energy_collectors:antimatter_block", "equivalent_exchange_energy_collectors:aeternalis_fuel", "equivalent_exchange_energy_collectors:antimatter_block"},
-		{"equivalent_exchange_energy_collectors:antimatter_block", "equivalent_exchange_energy_collectors:antimatter_block", "equivalent_exchange_energy_collectors:antimatter_block"}
+		{modname.."antimatter_block", modname.."antimatter_block", modname.."antimatter_block"},
+		{modname.."antimatter_block", modname.."aeternalis_fuel", modname.."antimatter_block"},
+		{modname.."antimatter_block", modname.."antimatter_block", modname.."antimatter_block"}
 	}
 })

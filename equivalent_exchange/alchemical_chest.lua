@@ -1,3 +1,5 @@
+local modname = "equivalent_exchange:"
+
 -- chest = {
 -- 	talisman_check = function(pos)
 -- 		local meta = minetest.get_meta(pos)
@@ -11,7 +13,7 @@
 
 -- Registering Nodes --
 
-minetest.register_node("equivalent_exchange:alchemical_chest", {
+minetest.register_node(modname.."alchemical_chest", {
 	description = "Alchemical Chest",
 	tiles = {
 		"equivalent_exchange_alchemical_chest_top.png",
@@ -53,21 +55,12 @@ minetest.register_node("equivalent_exchange:alchemical_chest", {
 	emc = 8987
 })
 
--- Registering Craft Items --
-
-minetest.register_craftitem("equivalent_exchange:talisman_of_repair", {
-	description = "Talisman of Repair",
-	inventory_image = "equivalent_exchange_talisman_of_repair.png",
-	stack_max = 1,
-	emc = 10000, 
-})
-
 -- Registering Crafts --
 
 minetest.register_craft({
-	output = "equivalent_exchange:alchemical_chest",
+	output = modname.."alchemical_chest",
 	recipe = {
-		{"equivalent_exchange:low_covalence", "equivalent_exchange:medium_covalence", "equivalent_exchange:high_covalence"},
+		{modname.."low_covalence", modname.."medium_covalence", modname.."high_covalence"},
 		{"default:stone", "default:diamond", "default:stone"},
 		{"default:steel_ingot", "default:chest", "default:steel_ingot"}
 	}

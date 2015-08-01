@@ -1,3 +1,5 @@
+local modname = "equivalent_exchange:"
+
 condenser = {	
 	convert = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -51,7 +53,7 @@ condenser = {
 -- Registering ABMs --
 
 minetest.register_abm({
-	nodenames = {"equivalent_exchange:condenser"},
+	nodenames = {modname.."condenser"},
 	interval = 1.5,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
@@ -60,7 +62,7 @@ minetest.register_abm({
 })
 -- Registering Nodes --
 
-minetest.register_node("equivalent_exchange:condenser", {
+minetest.register_node(modname.."condenser", {
 	description = "Energy Condenser",
 	tiles = {
 		"equivalent_exchange_condenser_top.png",
@@ -107,10 +109,10 @@ minetest.register_node("equivalent_exchange:condenser", {
 --Registering Crafts--
 
 minetest.register_craft({
-	output = "equivalent_exchange:condenser",
+	output = modname.."condenser",
 	recipe = {
 		{"default:obsidian", "default:mese", "default:obsidian"},
-		{"default:mese", "equivalent_exchange:alchemical_chest", "default:mese"},
+		{"default:mese", modname.."alchemical_chest", "default:mese"},
 		{"default:obsidian", "default:mese", "default:obsidian"}
 	}
 })

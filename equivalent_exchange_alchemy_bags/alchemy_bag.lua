@@ -1,3 +1,4 @@
+local modname = "equivalent_exchange_alchemy_bags:"
 local colors = {'grey','dark_grey','black','blue','cyan','green','dark_green','yellow','orange','brown','red','pink','magenta','violet'}
 
 minetest.register_craftitem("equivalent_exchange_alchemy_bags:white", {
@@ -19,7 +20,7 @@ for i = 1,14 do
 
 	-- Registering Craft Items --
 
-	minetest["register_craftitem"](":".."equivalent_exchange_alchemy_bags:"..colors[i], {
+	minetest["register_craftitem"](":"..modname..colors[i], {
 		description = colors[i]:gsub("^%l", string.upper).." Alchemy Bag",
 		groups = {not_in_creative_inventory = 1},
 		inventory_image = "equivalent_exchange_alchemy_bag_"..colors[i]..".png",
@@ -29,7 +30,7 @@ for i = 1,14 do
 	-- Registering Crafts --
 
 	minetest["register_craft"]({
-		output = "equivalent_exchange_alchemy_bags:"..colors[i],
+		output = modname..colors[i],
 		recipe = {
 			{"equivalent_exchange:high_covalence", "equivalent_exchange:high_covalence", "equivalent_exchange:high_covalence"},
 			{"wool:"..colors[i], "equivalent_exchange:alchemical_chest", "wool:"..colors[i]},
@@ -39,7 +40,7 @@ for i = 1,14 do
 
 	minetest["register_craft"]({
 		type = "shapeless",
-		output = "equivalent_exchange_alchemy_bags:"..colors[i],
+		output = modname..colors[i],
 		recipe = {"equivalent_exchange_alchemy_bags:white", "dye:"..colors[i]}
 	})
 
