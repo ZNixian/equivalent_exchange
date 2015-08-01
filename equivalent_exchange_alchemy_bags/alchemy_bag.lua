@@ -1,13 +1,13 @@
 local colors = {'grey','dark_grey','black','blue','cyan','green','dark_green','yellow','orange','brown','red','pink','magenta','violet'}
 
-minetest.register_craftitem("equivalent_exchange:alchemy_bag_white", {
+minetest.register_craftitem("equivalent_exchange_alchemy_bags:white", {
 	description = "White Alchemy Bag",
 	inventory_image = "equivalent_exchange_alchemy_bag_white.png",
 	emc = 9631,
 })
 
 minetest.register_craft({
-	output = "equivalent_exchange:equivalent_exchange:alchemy_bag",
+	output = "equivalent_exchange:alchemy_bag_white",
 	recipe = {
 		{"equivalent_exchange:high_covalence", "equivalent_exchange:high_covalence", "equivalent_exchange:high_covalence"},
 		{"wool:white", "equivalent_exchange:alchemical_chest", "wool:white"},
@@ -19,7 +19,7 @@ for i = 1,14 do
 
 	-- Registering Craft Items --
 
-	minetest["register_craftitem"](":".."equivalent_exchange:alchemy_bag_"..colors[i], {
+	minetest["register_craftitem"](":".."equivalent_exchange_alchemy_bags:"..colors[i], {
 		description = colors[i]:gsub("^%l", string.upper).." Alchemy Bag",
 		groups = {not_in_creative_inventory = 1},
 		inventory_image = "equivalent_exchange_alchemy_bag_"..colors[i]..".png",
@@ -29,7 +29,7 @@ for i = 1,14 do
 	-- Registering Crafts --
 
 	minetest["register_craft"]({
-		output = "equivalent_exchange:alchemy_bag_"..colors[i],
+		output = "equivalent_exchange_alchemy_bags:"..colors[i],
 		recipe = {
 			{"equivalent_exchange:high_covalence", "equivalent_exchange:high_covalence", "equivalent_exchange:high_covalence"},
 			{"wool:"..colors[i], "equivalent_exchange:alchemical_chest", "wool:"..colors[i]},
@@ -39,8 +39,8 @@ for i = 1,14 do
 
 	minetest["register_craft"]({
 		type = "shapeless",
-		output = "equivalent_exchange:alchemy_bag_"..colors[i],
-		recipe = {"equivalent_exchange:alchemy_bag_white", "dye:"..colors[i]}
+		output = "equivalent_exchange_alchemy_bags:"..colors[i],
+		recipe = {"equivalent_exchange_alchemy_bags:white", "dye:"..colors[i]}
 	})
 
 end

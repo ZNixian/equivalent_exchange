@@ -45,7 +45,7 @@ collector = {
 -- Registering ABMs --
 
 minetest.register_abm({
-	nodenames = {"equivalent_exchange:energy_collector_mk1"},
+	nodenames = {"equivalent_exchange_energy_collectors:mk1"},
 	interval = 1.0,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)	
@@ -63,7 +63,7 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-	nodenames = {"equivalent_exchange:energy_collector_mk2"},
+	nodenames = {"equivalent_exchange_energy_collectors:mk2"},
 	interval = 1.0,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)	
@@ -81,7 +81,7 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-	nodenames = {"equivalent_exchange:energy_collector_mk3"},
+	nodenames = {"equivalent_exchange_energy_collectors:mk3"},
 	interval = 1.0,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)	
@@ -99,7 +99,7 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-	nodenames = {"equivalent_exchange:antimatter_collector"},
+	nodenames = {"equivalent_exchange+energy_collectors:antimatter_collector"},
 	interval = 1.0,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)	
@@ -118,7 +118,7 @@ minetest.register_abm({
 
 -- Registering Nodes --
 
-minetest.register_node("equivalent_exchange:energy_collector_mk1", {
+minetest.register_node("equivalent_exchange_energy_collectors:mk1", {
 	description = "Energy Collector Mark 1",
 	tiles = {
 		"equivalent_exchange_energy_collector_mk1_top.png",
@@ -152,7 +152,7 @@ minetest.register_node("equivalent_exchange:energy_collector_mk1", {
 	emc = 529605
 })
 
-minetest.register_node("equivalent_exchange:energy_collector_mk2", {
+minetest.register_node("equivalent_exchange_energy_collectors:mk2", {
 	description = "Energy Collector Mark 2",
 	tiles = {
 		"equivalent_exchange_energy_collector_mk2_top.png",
@@ -186,7 +186,7 @@ minetest.register_node("equivalent_exchange:energy_collector_mk2", {
 	emc = 529605
 })
 
-minetest.register_node("equivalent_exchange:energy_collector_mk3", {
+minetest.register_node("equivalent_exchange_energy_collectors:mk3", {
 	description = "Energy Collector Mark 3",
 	tiles = {
 		"equivalent_exchange_energy_collector_mk3_top.png",
@@ -220,7 +220,7 @@ minetest.register_node("equivalent_exchange:energy_collector_mk3", {
 	emc = 529605
 })
 
-minetest.register_node("equivalent_exchange:antimatter_collector", {
+minetest.register_node("equivalent_exchange_energy_collectors:antimatter_collector", {
 	description = "Antimatter Collector",
 	tiles = {
 		"equivalent_exchange_antimatter_collector_top.png",
@@ -254,7 +254,7 @@ minetest.register_node("equivalent_exchange:antimatter_collector", {
 	emc = 269554885
 })
 
-minetest.register_node("equivalent_exchange:interdiction_stone", {
+minetest.register_node("equivalent_exchange_energy_collectors:interdiction_stone", {
 	description = "Interdiction Stone",
 	tiles = {
 		"equivalent_exchange_interdiction_stone.png",
@@ -278,7 +278,7 @@ minetest.register_node("equivalent_exchange:interdiction_stone", {
 -- Registering Crafts --
 
 minetest.register_craft({
-	output = "equivalent_exchange:energy_collector_mk1",
+	output = "equivalent_exchange_energy_collectors:mk1",
 	recipe = {
 		{"default:mese", "default:glass", "default:mese"},
 		{"default:mese", "default:diamondblock", "default:mese"},
@@ -287,28 +287,28 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "equivalent_exchange:energy_collector_mk2",
+	output = "equivalent_exchange_energy_collectors:mk2",
 	recipe = {
-		{"default:mese", "equivalent_exchange:red_matter", "default:mese"},
-		{"default:mese", "equivalent_exchange:energy_collector_mk1", "default:mese"},
+		{"default:mese", "equivalent_exchange_energy_collectors:red_matter", "default:mese"},
+		{"default:mese", "equivalent_exchange_energy_collectors:mk1", "default:mese"},
 		{"default:mese", "default:mese", "default:mese"}
 	}
 })
 
 minetest.register_craft({
-	output = "equivalent_exchange:energy_collector_mk3",
+	output = "equivalent_exchange_energy_collectors:mk3",
 	recipe = {
-		{"default:mese", "equivalent_exchange:antimatter", "default:mese"},
-		{"default:mese", "equivalent_exchange:energy_collector_mk2", "default:mese"},
+		{"default:mese", "equivalent_exchange_energy_collectors:antimatter", "default:mese"},
+		{"default:mese", "equivalent_exchange_energy_collectors:mk2", "default:mese"},
 		{"default:mese", "default:mese", "default:mese"}
 	}
 })
 
 minetest.register_craft({
-	output = "equivalent_exchange:interdiction_stone",
+	output = "equivalent_exchange_energy_collectors:interdiction_stone",
 	recipe = {
-		{"default:torch", "equivalent_exchange:aeternalis_fuel", "default:torch"},
-		{"equivalent_exchange:aeternalis_fuel", "equivalent_exchange:philosophers_stone", "equivalent_exchange:aeternalis_fuel"},
+		{"default:torch", "equivalent_exchange_energy_collectors:aeternalis_fuel", "default:torch"},
+		{"equivalent_exchange_energy_collectors:aeternalis_fuel", "equivalent_exchange:philosophers_stone", "equivalent_exchange_energy_collectors:aeternalis_fuel"},
 		{"equivalent_exchange:high_covalence", "equivalent_exchange:high_covalence", "equivalent_exchange:high_covalence"}
 	},
 	replacements = {
@@ -317,10 +317,10 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "equivalent_exchange:antimatter_collector",
+	output = "equivalent_exchange_energy_collectors:antimatter_collector",
 	recipe = {
-		{"equivalent_exchange:condensed_antimatter", "equivalent_exchange:condensed_antimatter", "equivalent_exchange:condensed_antimatter"},
-		{"equivalent_exchange:condensed_antimatter", "equivalent_exchange:energy_collector_mk3", "equivalent_exchange:condensed_antimatter"},
-		{"equivalent_exchange:condensed_antimatter", "equivalent_exchange:condensed_antimatter", "equivalent_exchange:condensed_antimatter"}
+		{"equivalent_exchange_energy_collectors:condensed_antimatter", "equivalent_exchange_energy_collectors:condensed_antimatter", "equivalent_exchange_energy_collectors:condensed_antimatter"},
+		{"equivalent_exchange_energy_collectors:condensed_antimatter", "equivalent_exchange_energy_collectors_energy_collectors:mk3", "equivalent_exchange_energy_collectors:condensed_antimatter"},
+		{"equivalent_exchange_energy_collectors:condensed_antimatter", "equivalent_exchange_energy_collectors:condensed_antimatter", "equivalent_exchange_energy_collectors:condensed_antimatter"}
 	}
 })
