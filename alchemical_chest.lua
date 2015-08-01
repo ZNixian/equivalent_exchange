@@ -1,3 +1,13 @@
+-- chest = {
+-- 	talisman_check = function(pos)
+-- 		local meta = minetest.get_meta(pos)
+-- 		local inventory = meta:get_inventory()
+-- 		local size = inventory:get_size("container")
+-- 		for i = 1, size do
+-- 			local stack = inventory:get_stack("from", i)
+			
+-- 		end
+-- }
 
 -- Registering Nodes --
 
@@ -31,13 +41,25 @@ minetest.register_node("equivalent_exchange:alchemical_chest", {
 		local inv = meta:get_inventory()
 		return inv:is_empty("main")
 	end,
-	on_metadata_inventory_put = function(pos, listname, index, stack, player)
-		return stack:get_count()
-	end,
-	on_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
-		return count
-	end,
+	-- on_metadata_inventory_put = function(pos, listname, index, stack, player)
+	-- 	chest.talisman_check(pos)
+	-- end,
+	-- on_metadata_inventory_take = function(pos, listname, index, stack, player) 
+	-- 	chest.talisman_check(pos)
+	-- end,
+	-- on_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+	-- 	chest.talisman_check(pos)
+	-- end,
 	emc = 8987
+})
+
+-- Registering Craft Items --
+
+minetest.register_craftitem("equivalent_exchange:talisman_of_repair", {
+	description = "Talisman of Repair",
+	inventory_image = "equivalent_exchange_talisman_of_repair.png",
+	stack_max = 1,
+	emc = 10000, 
 })
 
 -- Registering Crafts --

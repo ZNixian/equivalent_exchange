@@ -6,6 +6,8 @@ minetest.register_craftitem("equivalent_exchange:philosophers_stone", {
 	emc = 8892,
 })
 
+-- Registering Crafts -- 
+
 minetest.register_craft({
 	output = "equivalent_exchange:philosophers_stone",
 	recipe = {
