@@ -1,7 +1,7 @@
 local modname = "equivalent_exchange_energy_collectors:"
 
 collector = {
-	emc_gather = function(orig_emc, mark,multiplier)
+	emc_gather = function(orig_emc, mark, multiplier)
 		return orig_emc + (10^(mark - 1)) * multiplier
 	end,
 	emc_transfer = function(mark,pos,multiplier)
@@ -23,14 +23,45 @@ collector = {
 				emc_transferable_nodes_length = emc_transferable_nodes_length + 1
 			end
 		end
+		if emc_transferable_nodes_length == 0 then
+			local generate_amount = math.floor(emc / 10)
+			local inventory = meta:get_inventory()
+			local size = inventory:get_size("container")
+			if emc >= 10 then
+				meta:set_int("emc", emc - 10*generate_amount)
+				if mark == 4 then
+					meta:set_string("formspec",
+						"size[8,7.5]"..
+						"label[0,0;Antimatter Collector]"..
+						"label[4,0;EMC Stored: "..emc - 10*generate_amount.."]"..
+						"list[current_name;container;0,0.5;8,7;]")
+				else
+					meta:set_string("formspec",
+						"size[8,7.5]"..
+						"label[0,0;Energy Collector Mark "..mark.."]"..
+						"label[4,0;EMC Stored: "..emc - 10*generate_amount.."]"..
+						"list[current_name;container;0,0.5;8,7;]")
+				end
+				inventory:add_item("container",modname.."klein_star "..generate_amount)
+			end
+		end
 		local newemc = (collector.emc_gather(emc, mark, multiplier))
 		local distribution = math.floor(newemc / emc_transferable_nodes_length)
 		for j = 1,emc_transferable_nodes_length do
-			meta:set_string("formspec",
-				"size[6,1.5]"..
-				"label[0,0;Energy Collector Mark"..mark.."]"..
-				"label[4,0;EMC Stored: "..(newemc - distribution).."]"..
-				"list[current_name;container;0,0.5;6,1;]")
+			print(mark)
+			if mark == 4 then
+				meta:set_string("formspec",
+					"size[8,7.5]"..
+					"label[0,0;Antimatter Collector]"..
+					"label[4,0;EMC Stored: "..(newemc - distribution).."]"..
+					"list[current_name;container;0,0.5;8,7;]")
+			else
+				meta:set_string("formspec",
+					"size[8,7.5]"..
+					"label[0,0;Energy Collector Mark "..mark.."]"..
+					"label[4,0;EMC Stored: "..(newemc - distribution).."]"..
+					"list[current_name;container;0,0.5;8,7;]")
+			end
 			meta:set_int("emc",(newemc - distribution))
 			emc_transferable_nodes[j]:set_int("emc", (emc_transferable_nodes[j]:get_int("emc") + distribution))
 		end
@@ -55,10 +86,10 @@ minetest.register_abm({
 		local emc = meta:get_int("emc")
 		local multiplier = collector.check_multiplier(pos)
 		meta:set_string("formspec",
-			"size[6,1.5]"..
+			"size[8,7.5]"..
 			"label[0,0;Energy Collector Mark 1]"..
 			"label[4,0;EMC Stored: "..collector.emc_gather(emc,1,multiplier).."]"..
-			"list[current_name;container;0,0.5;6,1;]")
+			"list[current_name;container;0,0.5;8,7;]")
 		meta:set_int("emc",collector.emc_gather(emc,1,multiplier))
 		collector.emc_transfer(1,pos,multiplier)
 	end,
@@ -73,10 +104,10 @@ minetest.register_abm({
 		local emc = meta:get_int("emc")
 		local multiplier = collector.check_multiplier(pos)
 		meta:set_string("formspec",
-			"size[6,1.5]"..
+			"size[8,7.5]"..
 			"label[0,0;Energy Collector Mark 2]"..
 			"label[4,0;EMC Stored: "..collector.emc_gather(emc,2,multiplier).."]"..
-			"list[current_name;container;0,0.5;6,1;]")
+			"list[current_name;container;0,0.5;8,7;]")
 		meta:set_int("emc",collector.emc_gather(emc,2,multiplier))
 		collector.emc_transfer(2,pos,multiplier)
 	end,
@@ -91,10 +122,10 @@ minetest.register_abm({
 		local emc = meta:get_int("emc")
 		local multiplier = collector.check_multiplier(pos)
 		meta:set_string("formspec",
-			"size[6,1.5]"..
+			"size[8,7.5]"..
 			"label[0,0;Energy Collector Mark 3]"..
 			"label[4,0;EMC Stored: "..collector.emc_gather(emc,3,multiplier).."]"..
-			"list[current_name;container;0,0.5;6,1;]")
+			"list[current_name;container;0,0.5;8,7;]")
 		meta:set_int("emc",collector.emc_gather(emc,3,multiplier))
 		collector.emc_transfer(3,pos,multiplier)
 	end,
@@ -109,10 +140,10 @@ minetest.register_abm({
 		local emc = meta:get_int("emc")
 		local multiplier = collector.check_multiplier(pos)
 		meta:set_string("formspec",
-			"size[6,1.5]"..
+			"size[8,7.5]"..
 			"label[0,0;Antimatter Collector]"..
 			"label[4,0;EMC Stored: "..collector.emc_gather(emc,4,multiplier).."]"..
-			"list[current_name;container;0,0.5;6,1;]")
+			"list[current_name;container;0,0.5;8,7;]")
 		meta:set_int("emc",collector.emc_gather(emc,4,multiplier))
 		collector.emc_transfer(4,pos,multiplier)
 	end,
@@ -137,19 +168,19 @@ minetest.register_node(modname.."mk1", {
 	on_construct = function(pos)
 	local meta = minetest.get_meta(pos)
 	meta:set_string("formspec",
-		"size[6,1.5]"..
+		"size[8,7.5]"..
 		"label[0,0;Energy Collector Mark 1]"..
 		"label[4,0;EMC Stored: 0]"..
-		"list[current_name;container;0,0.5;6,1;]")
+		"list[current_name;container;0,0.5;8,7;]")
 	meta:set_string("infotext", "Energy Collector Mark 1")
 	meta:set_int("emc", 0)
 	local inv = meta:get_inventory()
-	inv:set_size("container", 6)
+	inv:set_size("container", 8*7)
 	end,
 	can_dig = function(pos,player)
 		local meta = minetest.env:get_meta(pos);
 		local inv = meta:get_inventory()
-		return inv:is_empty("main")
+		return inv:is_empty("container")
 	end,
 	emc = 529605
 })
@@ -171,19 +202,19 @@ minetest.register_node(modname.."mk2", {
 	on_construct = function(pos)
 	local meta = minetest.get_meta(pos)
 	meta:set_string("formspec",
-		"size[6,1.5]"..
+		"size[8,7.5]"..
 		"label[0,0;Energy Collector Mark 2]"..
 		"label[4,0;EMC Stored: 0]"..
-		"list[current_name;container;0,0.5;6,1;]")
+		"list[current_name;container;0,0.5;8,7;]")
 	meta:set_string("infotext", "Energy Collector Mark 2")
 	meta:set_int("emc", 0)
 	local inv = meta:get_inventory()
-	inv:set_size("container", 6)
+	inv:set_size("container", 8*7)
 	end,
 	can_dig = function(pos,player)
 		local meta = minetest.env:get_meta(pos);
 		local inv = meta:get_inventory()
-		return inv:is_empty("main")
+		return inv:is_empty("container")
 	end,
 	emc = 529605
 })
@@ -205,19 +236,19 @@ minetest.register_node(modname.."mk3", {
 	on_construct = function(pos)
 	local meta = minetest.get_meta(pos)
 	meta:set_string("formspec",
-		"size[6,1.5]"..
+		"size[8,7.5]"..
 		"label[0,0;Energy Collector Mark 3]"..
 		"label[4,0;EMC Stored: 0]"..
-		"list[current_name;container;0,0.5;6,1;]")
+		"list[current_name;container;0,0.5;8,7;]")
 	meta:set_string("infotext", "Energy Collector Mark 3")
 	meta:set_int("emc", 0)
 	local inv = meta:get_inventory()
-	inv:set_size("container", 6)
+	inv:set_size("container", 8*7)
 	end,
 	can_dig = function(pos,player)
 		local meta = minetest.env:get_meta(pos);
 		local inv = meta:get_inventory()
-		return inv:is_empty("main")
+		return inv:is_empty("container")
 	end,
 	emc = 529605
 })
@@ -239,19 +270,19 @@ minetest.register_node(modname.."antimatter_collector", {
 	on_construct = function(pos)
 	local meta = minetest.get_meta(pos)
 	meta:set_string("formspec",
-		"size[6,1.5]"..
+		"size[8,7.5]"..
 		"label[0,0;Antimatter Collector]"..
 		"label[4,0;EMC Stored: 0]"..
-		"list[current_name;container;0,0.5;6,1;]")
+		"list[current_name;container;0,0.5;8,7;]")
 	meta:set_string("infotext", "Antimatter Collector")
 	meta:set_int("emc", 0)
 	local inv = meta:get_inventory()
-	inv:set_size("container", 6)
+	inv:set_size("container", 8*7)
 	end,
 	can_dig = function(pos,player)
 		local meta = minetest.env:get_meta(pos);
 		local inv = meta:get_inventory()
-		return inv:is_empty("main")
+		return inv:is_empty("container")
 	end,
 	emc = 269554885
 })
@@ -275,6 +306,14 @@ minetest.register_node(modname.."interdiction_stone", {
 		local meta = minetest.get_meta(pos)
 		meta:set_int("multiplier", 2)
 	end,
+})
+
+-- Registering Craft Items --
+
+minetest.register_craftitem(modname.."klein_star", {
+	description = "Klein Star",
+	inventory_image = "ee_energy_collectors_klein_star.png",
+	emc = 100, 
 })
 
 -- Registering Crafts --
