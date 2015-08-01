@@ -3,7 +3,7 @@ local colors = {'grey','dark_grey','black','blue','cyan','green','dark_green','y
 
 minetest.register_craftitem("equivalent_exchange_alchemy_bags:white", {
 	description = "White Alchemy Bag",
-	inventory_image = "equivalent_exchange_alchemy_bag_white.png",
+	inventory_image = "ee_alchemy_bags_white.png",
 	emc = 9631,
 })
 
@@ -23,7 +23,7 @@ for i = 1,14 do
 	minetest["register_craftitem"](":"..modname..colors[i], {
 		description = colors[i]:gsub("^%l", string.upper).." Alchemy Bag",
 		groups = {not_in_creative_inventory = 1},
-		inventory_image = "equivalent_exchange_alchemy_bag_"..colors[i]..".png",
+		inventory_image = "ee_alchemy_bags_"..colors[i]..".png",
 		emc = 9631,
 	})
 

@@ -5,12 +5,12 @@ local modname = "equivalent_exchange_energy_collectors:"
 minetest.register_node(modname.."red_matter_block", {
 	description = "Red Matter Block",
 	tiles = {
-		"equivalent_exchange_red_matter_block.png",
-		"equivalent_exchange_red_matter_block.png",
-		"equivalent_exchange_red_matter_block.png",
-		"equivalent_exchange_red_matter_block.png",
-		"equivalent_exchange_red_matter_block.png",
-		"equivalent_exchange_red_matter_block.png"
+		"ee_energy_collectors_red_matter_block.png",
+		"ee_energy_collectors_red_matter_block.png",
+		"ee_energy_collectors_red_matter_block.png",
+		"ee_energy_collectors_red_matter_block.png",
+		"ee_energy_collectors_red_matter_block.png",
+		"ee_energy_collectors_red_matter_block.png"
 	},
 	paramtype2 = "facedir",
 	groups = {cracky = 3},
@@ -22,12 +22,12 @@ minetest.register_node(modname.."red_matter_block", {
 minetest.register_node(modname.."antimatter_block", {
 	description = "Antimatter Block",
 	tiles = {
-		"equivalent_exchange_antimatter_block.png",
-		"equivalent_exchange_antimatter_block.png",
-		"equivalent_exchange_antimatter_block.png",
-		"equivalent_exchange_antimatter_block.png",
-		"equivalent_exchange_antimatter_block.png",
-		"equivalent_exchange_antimatter_block.png"
+		"ee_energy_collectors_antimatter_block.png",
+		"ee_energy_collectors_antimatter_block.png",
+		"ee_energy_collectors_antimatter_block.png",
+		"ee_energy_collectors_antimatter_block.png",
+		"ee_energy_collectors_antimatter_block.png",
+		"ee_energy_collectors_antimatter_block.png"
 	},
 	paramtype2 = "facedir",
 	groups = {cracky = 3},
@@ -39,12 +39,12 @@ minetest.register_node(modname.."antimatter_block", {
 minetest.register_node(modname.."condensed_antimatter", {
 	description = "Condensed Antimatter",
 	tiles = {
-		"equivalent_exchange_condensed_antimatter.png",
-		"equivalent_exchange_condensed_antimatter.png",
-		"equivalent_exchange_condensed_antimatter.png",
-		"equivalent_exchange_condensed_antimatter.png",
-		"equivalent_exchange_condensed_antimatter.png",
-		"equivalent_exchange_condensed_antimatter.png"
+		"ee_energy_collectors_condensed_antimatter.png",
+		"ee_energy_collectors_condensed_antimatter.png",
+		"ee_energy_collectors_condensed_antimatter.png",
+		"ee_energy_collectors_condensed_antimatter.png",
+		"ee_energy_collectors_condensed_antimatter.png",
+		"ee_energy_collectors_condensed_antimatter.png"
 	},
 	paramtype2 = "facedir",
 	groups = {cracky = 5},
@@ -57,31 +57,31 @@ minetest.register_node(modname.."condensed_antimatter", {
 
 minetest.register_craftitem(modname.."alchemical_crystal", {
 	description = "Alchemical Crystal",
-	inventory_image = "equivalent_exchange_alchemical_crystal.png",
+	inventory_image = "ee_energy_collectors_alchemical_crystal.png",
 	emc = 512,
 })
 
 minetest.register_craftitem(modname.."mobius_fuel", {
 	description = "Mobius Fuel",
-	inventory_image = "equivalent_exchange_mobius_fuel.png",
+	inventory_image = "ee_energy_collectors_mobius_fuel.png",
 	emc = 2048,
 })
 
 minetest.register_craftitem(modname.."aeternalis_fuel", {
 	description = "Aeternalis Fuel",
-	inventory_image = "equivalent_exchange_aeternalis_fuel.png",
+	inventory_image = "ee_energy_collectors_aeternalis_fuel.png",
 	emc = 8192,
 })
 
 minetest.register_craftitem(modname.."red_matter", {
 	description = "Red Matter",
-	inventory_image = "equivalent_exchange_red_matter.png",
+	inventory_image = "ee_energy_collectors_red_matter.png",
 	emc = 139264
 })
 
 minetest.register_craftitem(modname.."antimatter", {
 	description = "Antimatter",
-	inventory_image = "equivalent_exchange_antimatter.png",
+	inventory_image = "ee_energy_collectors_antimatter.png",
 	emc = 466944
 })
 

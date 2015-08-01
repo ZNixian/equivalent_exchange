@@ -65,12 +65,12 @@ minetest.register_abm({
 minetest.register_node(modname.."condenser", {
 	description = "Energy Condenser",
 	tiles = {
-		"equivalent_exchange_condenser_top.png",
-		"equivalent_exchange_condenser_bottom.png",
-		"equivalent_exchange_condenser_side.png",
-		"equivalent_exchange_condenser_side.png",
-		"equivalent_exchange_condenser_side.png",
-		"equivalent_exchange_condenser_side.png"
+		"ee_condenser_top.png",
+		"ee_condenser_bottom.png",
+		"ee_condenser_side.png",
+		"ee_condenser_side.png",
+		"ee_condenser_side.png",
+		"ee_condenser_side.png"
 	},
 	paramtype2 = "facedir",
 	groups = {cracky = 2},

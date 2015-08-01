@@ -16,12 +16,12 @@ local modname = "equivalent_exchange:"
 minetest.register_node(modname.."alchemical_chest", {
 	description = "Alchemical Chest",
 	tiles = {
-		"equivalent_exchange_alchemical_chest_top.png",
-		"equivalent_exchange_alchemical_chest_bottom.png",
-		"equivalent_exchange_alchemical_chest_side.png",
-		"equivalent_exchange_alchemical_chest_side.png",
-		"equivalent_exchange_alchemical_chest_side.png",
-		"equivalent_exchange_alchemical_chest_front.png",
+		"ee_alchemical_chest_top.png",
+		"ee_alchemical_chest_bottom.png",
+		"ee_alchemical_chest_side.png",
+		"ee_alchemical_chest_side.png",
+		"ee_alchemical_chest_side.png",
+		"ee_alchemical_chest_front.png",
 	},
 	paramtype2 = "facedir",
 	groups = {cracky = 2},

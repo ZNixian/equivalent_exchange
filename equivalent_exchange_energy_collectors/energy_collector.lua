@@ -101,7 +101,7 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-	nodenames = {"equivalent_exchange+energy_collectors:antimatter_collector"},
+	nodenames = {modname.."antimatter_collector"},
 	interval = 1.0,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)	
@@ -123,12 +123,12 @@ minetest.register_abm({
 minetest.register_node(modname.."mk1", {
 	description = "Energy Collector Mark 1",
 	tiles = {
-		"equivalent_exchange_energy_collector_mk1_top.png",
-		"equivalent_exchange_energy_collector_mk1_bottom.png",
-		"equivalent_exchange_energy_collector_mk1_side.png",
-		"equivalent_exchange_energy_collector_mk1_side.png",
-		"equivalent_exchange_energy_collector_mk1_side.png",
-		"equivalent_exchange_energy_collector_mk1_side.png",
+		"ee_energy_collectors_energy_collector_mk1_top.png",
+		"ee_energy_collectors_energy_collector_mk1_bottom.png",
+		"ee_energy_collectors_energy_collector_mk1_side.png",
+		"ee_energy_collectors_energy_collector_mk1_side.png",
+		"ee_energy_collectors_energy_collector_mk1_side.png",
+		"ee_energy_collectors_energy_collector_mk1_side.png",
 	},
 	paramtype2 = "facedir",
 	groups = {cracky = 2},
@@ -157,12 +157,12 @@ minetest.register_node(modname.."mk1", {
 minetest.register_node(modname.."mk2", {
 	description = "Energy Collector Mark 2",
 	tiles = {
-		"equivalent_exchange_energy_collector_mk2_top.png",
-		"equivalent_exchange_energy_collector_mk2_bottom.png",
-		"equivalent_exchange_energy_collector_mk2_side.png",
-		"equivalent_exchange_energy_collector_mk2_side.png",
-		"equivalent_exchange_energy_collector_mk2_side.png",
-		"equivalent_exchange_energy_collector_mk2_side.png",
+		"ee_energy_collectors_energy_collector_mk2_top.png",
+		"ee_energy_collectors_energy_collector_mk2_bottom.png",
+		"ee_energy_collectors_energy_collector_mk2_side.png",
+		"ee_energy_collectors_energy_collector_mk2_side.png",
+		"ee_energy_collectors_energy_collector_mk2_side.png",
+		"ee_energy_collectors_energy_collector_mk2_side.png",
 	},
 	paramtype2 = "facedir",
 	groups = {cracky = 2},
@@ -191,12 +191,12 @@ minetest.register_node(modname.."mk2", {
 minetest.register_node(modname.."mk3", {
 	description = "Energy Collector Mark 3",
 	tiles = {
-		"equivalent_exchange_energy_collector_mk3_top.png",
-		"equivalent_exchange_energy_collector_mk3_bottom.png",
-		"equivalent_exchange_energy_collector_mk3_side.png",
-		"equivalent_exchange_energy_collector_mk3_side.png",
-		"equivalent_exchange_energy_collector_mk3_side.png",
-		"equivalent_exchange_energy_collector_mk3_side.png",
+		"ee_energy_collectors_energy_collector_mk3_top.png",
+		"ee_energy_collectors_energy_collector_mk3_bottom.png",
+		"ee_energy_collectors_energy_collector_mk3_side.png",
+		"ee_energy_collectors_energy_collector_mk3_side.png",
+		"ee_energy_collectors_energy_collector_mk3_side.png",
+		"ee_energy_collectors_energy_collector_mk3_side.png",
 	},
 	paramtype2 = "facedir",
 	groups = {cracky = 2},
@@ -225,12 +225,12 @@ minetest.register_node(modname.."mk3", {
 minetest.register_node(modname.."antimatter_collector", {
 	description = "Antimatter Collector",
 	tiles = {
-		"equivalent_exchange_antimatter_collector_top.png",
-		"equivalent_exchange_antimatter_collector_bottom.png",
-		"equivalent_exchange_antimatter_collector_side.png",
-		"equivalent_exchange_antimatter_collector_side.png",
-		"equivalent_exchange_antimatter_collector_side.png",
-		"equivalent_exchange_antimatter_collector_side.png",
+		"ee_energy_collectors_antimatter_collector_top.png",
+		"ee_energy_collectors_antimatter_collector_bottom.png",
+		"ee_energy_collectors_antimatter_collector_side.png",
+		"ee_energy_collectors_antimatter_collector_side.png",
+		"ee_energy_collectors_antimatter_collector_side.png",
+		"ee_energy_collectors_antimatter_collector_side.png",
 	},
 	paramtype2 = "facedir",
 	groups = {cracky = 2},
@@ -259,12 +259,12 @@ minetest.register_node(modname.."antimatter_collector", {
 minetest.register_node(modname.."interdiction_stone", {
 	description = "Interdiction Stone",
 	tiles = {
-		"equivalent_exchange_interdiction_stone.png",
-		"equivalent_exchange_interdiction_stone.png",
-		"equivalent_exchange_interdiction_stone.png",
-		"equivalent_exchange_interdiction_stone.png",
-		"equivalent_exchange_interdiction_stone.png",
-		"equivalent_exchange_interdiction_stone.png"
+		"ee_energy_collectors_interdiction_stone.png",
+		"ee_energy_collectors_interdiction_stone.png",
+		"ee_energy_collectors_interdiction_stone.png",
+		"ee_energy_collectors_interdiction_stone.png",
+		"ee_energy_collectors_interdiction_stone.png",
+		"ee_energy_collectors_interdiction_stone.png"
 	},
 	paramtype2 = "facedir",
 	groups = {cracky = 1},
@@ -322,7 +322,7 @@ minetest.register_craft({
 	output = modname.."antimatter_collector",
 	recipe = {
 		{modname.."condensed_antimatter", modname.."condensed_antimatter", modname.."condensed_antimatter"},
-		{modname.."condensed_antimatter", "equivalent_exchange_energy_collectors_energy_collectors:mk3", modname.."condensed_antimatter"},
+		{modname.."condensed_antimatter", modname.."mk3", modname.."condensed_antimatter"},
 		{modname.."condensed_antimatter", modname.."condensed_antimatter", modname.."condensed_antimatter"}
 	}
 })

@@ -3,7 +3,7 @@ local modname = "equivalent_exchange_extras:"
 
 minetest.register_craftitem(modname.."talisman_of_repair", {
 	description = "Talisman of Repair",
-	inventory_image = "equivalent_exchange_talisman_of_repair.png",
+	inventory_image = "ee_extras_talisman_of_repair.png",
 	stack_max = 1,
 	emc = 10000, 
 })

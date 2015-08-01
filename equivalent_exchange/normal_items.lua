@@ -4,19 +4,19 @@ local modname = "equivalent_exchange:"
 
 minetest.register_craftitem(modname.."low_covalence", {
 	description = "Low Covalence Dust",
-	inventory_image = "equivalent_exchange_low_covalence.png",
+	inventory_image = "ee_low_covalence.png",
 	emc = 1,
 })
 
 minetest.register_craftitem(modname.."medium_covalence", {
 	description = "Medium Covalence Dust",
-	inventory_image = "equivalent_exchange_medium_covalence.png",
+	inventory_image = "ee_medium_covalence.png",
 	emc = 8,
 })
 
 minetest.register_craftitem(modname.."high_covalence", {
 	description = "High Covalence Dust",
-	inventory_image = "equivalent_exchange_high_covalence.png",
+	inventory_image = "ee_high_covalence.png",
 	emc = 208,
 })
 

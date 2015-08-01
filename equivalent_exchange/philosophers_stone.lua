@@ -4,7 +4,7 @@ local modname = "equivalent_exchange:"
 
 minetest.register_craftitem(modname.."philosophers_stone", {
 	description = "Philosopher's Stone",
-	inventory_image = "equivalent_exchange_philosophers_stone.png",
+	inventory_image = "ee_philosophers_stone.png",
 	emc = 8892,
 })
 
