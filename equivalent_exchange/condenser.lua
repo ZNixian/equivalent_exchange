@@ -25,17 +25,17 @@ condenser = {
 					emc = emc + local_emc * stack.count
 					inventory:set_stack("from", i, {})
 				end
-				--print(dump(stack))
 			end
 		end
-		local timesOver = math.floor(emc / target_emc)
-		emc = emc - timesOver * target_emc
+		local generate_amount  = math.floor(emc / target_emc)
+		local times_over = math.floor(generate_amount / 99)
+		emc = emc - generate_amount * target_emc
 		meta:set_int("emc", emc)
-		for i = 1, timesOver do
+		for i = 1, times_over do
   			inventory:add_item("from", {name = target.name, count = 99})
   		end
-  		if timesOver % 99 > 0 then
-   			inventory:add_item("from", {name = target.name, count = timesOver % 99})
+  		if generate_amount % 99 > 0 then
+   			inventory:add_item("from", {name = target.name, count = generate_amount % 99})
   		end
 		meta:set_string("formspec", condenser.get_formspec(emc, target_emc))
 	end,
