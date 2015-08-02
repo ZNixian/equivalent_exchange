@@ -25,6 +25,7 @@ collector = {
 		end
 		if emc_transferable_nodes_length == 0 then
 			local generate_amount = math.floor(emc / 10)
+			local timesOver = math.floor(generate_amount / 99)
 			local inventory = meta:get_inventory()
 			local size = inventory:get_size("container")
 			if emc >= 10 then
@@ -42,7 +43,12 @@ collector = {
 						"label[4,0;EMC Stored: "..emc - 10*generate_amount.."]"..
 						"list[current_name;container;0,0.5;8,7;]")
 				end
-				inventory:add_item("container",modname.."klein_star "..generate_amount)
+				for i = 1, timesOver do
+  					inventory:add_item("container", {name = modname.."klein_star", count = 99})
+  				end
+  				if timesOver % 99 > 0 then
+   					inventory:add_item("container", {name = modname.."klein_star", count = timesOver % 99})
+  				end
 			end
 		end
 		local newemc = (collector.emc_gather(emc, mark, multiplier))

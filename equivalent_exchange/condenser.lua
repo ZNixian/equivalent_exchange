@@ -31,7 +31,12 @@ condenser = {
 		local timesOver = math.floor(emc / target_emc)
 		emc = emc - timesOver * target_emc
 		meta:set_int("emc", emc)
-		inventory:add_item("from", {name=target.name, count = timesOver})
+		for i = 1, timesOver do
+  			inventory:add_item("from", {name = target.name, count = 99})
+  		end
+  		if timesOver % 99 > 0 then
+   			inventory:add_item("from", {name = target.name, count = timesOver % 99})
+  		end
 		meta:set_string("formspec", condenser.get_formspec(emc, target_emc))
 	end,
 
