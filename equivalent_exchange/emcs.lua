@@ -83,15 +83,25 @@ local emcs = {
 --	}
 }
 
-for type, emcset in pairs(emcs) do
-	for prefix, subs in pairs(emcset) do
-		for name, emc in pairs(subs) do
-			local ornode = minetest.registered_items[prefix..name]
-			local node = {emc=emc}
-			for tagname, tagvalue in pairs(ornode) do
-				node[tagname] = tagvalue
-			end
-			minetest["register_"..type](":"..prefix..name, node)
+-- for type, emcset in pairs(emcs) do
+-- 	for prefix, subs in pairs(emcset) do
+-- 		for name, emc in pairs(subs) do
+-- 			local ornode = minetest.registered_items[prefix..name]
+-- 			local node = {emc=emc}
+-- 			for tagname, tagvalue in pairs(ornode) do
+-- 				node[tagname] = tagvalue
+-- 			end
+-- 			minetest["register_"..type](":"..prefix..name, node)
+-- 		end
+-- 	end
+-- end
+
+for type, emctable in pairs(emcs) do
+	for modname, itemlist in pairs(emctable) do
+		for itemname, emcvalue in pairs(itemlist) do
+			minetest.override_item(modname..itemname, {
+			    emc = emcvalue,
+			})
 		end
 	end
 end
