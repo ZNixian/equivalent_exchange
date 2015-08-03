@@ -19,5 +19,40 @@ minetest.register_craft({
 	}
 })
 
---Transmutation Crafts here after default EMCs are sorted out --
+--Transmutation Crafts --
 
+minetest.register_craft({
+	type = "shapeless",
+	output = "default:steel_ingot 4",
+	recipe = {modname.."philosophers_stone", "default:gold_ingot"},
+	replacements = {
+		{modname.."philosophers_stone", modname.."philosophers_stone"}
+	}
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "default:gold_ingot",
+	recipe = {modname.."philosophers_stone", "default:steel_ingot", "default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
+	replacements = {
+		{modname.."philosophers_stone", modname.."philosophers_stone"}
+	}
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "default:gold_ingot 2",
+	recipe = {modname.."philosophers_stone", "default:diamond"},
+	replacements = {
+		{modname.."philosophers_stone", modname.."philosophers_stone"}
+	}
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "default:diamond",
+	recipe = {modname.."philosophers_stone", "default:gold_ingot", "default:gold_ingot"},
+	replacements = {
+		{modname.."philosophers_stone", modname.."philosophers_stone"}
+	}
+})
