@@ -71,9 +71,6 @@ local emcs = {
 		viola = 5,
 	},
 }
-minetest.override_item("wool:green", {
-	description = "dlkasjfdslkfjlskadj"
-	})
 
 for modname, itemlist in pairs(emcs) do
 	for itemname, emcvalue in pairs(itemlist) do
