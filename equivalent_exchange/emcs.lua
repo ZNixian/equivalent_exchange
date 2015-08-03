@@ -1,6 +1,6 @@
 local emcs = {
 	["default"] = {
-		stone = 2,
+		stone = 4,
 		cobble = 1,
 		desert_stone = 1,
 		stonebrick = 1,
@@ -72,14 +72,11 @@ local emcs = {
 		clay_brick = 16,
 	}
 }
---	block = {
---		["default:"] = {
---		}
---	}
+minetest.override_item("wool:green", {
+	description = "dlkasjfdslkfjlskadj"
+	})
 
-
-
-for modname, itemlist in emcs do
+for modname, itemlist in pairs(emcs) do
 	for itemname, emcvalue in pairs(itemlist) do
 		minetest.override_item(modname..":"..itemname, {
 			-- Weird bug or whatever
@@ -88,6 +85,7 @@ for modname, itemlist in emcs do
 			-- if the latter, you can't redefine items at runtime.
 			-- if the former, that may be a bug in the engine
 			-- description = minetest.registered_items[itemname].description.."\nEMC = "..tostring(emcvalue),
+		    description = "ljlkj",
 		    emc = emcvalue,
 		})
 	end
