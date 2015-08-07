@@ -4,33 +4,32 @@ local emcs = {
 		dirt = 1,
 		grass_1 = 5,
 		sand = 1,
-		-- papyrus
-		-- clay
-		-- clay_lump	
-		-- tree
-		-- leaves
-		-- apple
-		-- sapling
+		papyrus = 50,
+		clay = 160,
+		clay_lump = 40,
+		tree = 16,
+		leaves = 5,
+		apple = 128,
+		sapling = 16,
 	-- Tundra --
 		snow = 1,
-		-- ice 
-		-- pinetree
-		-- pinewood
-		-- pine_sapling
+		ice = 10,
+		pinetree = 16,
+		pine_sapling = 16,
 	-- Desert --
 		desert_cobble = 1,
 		desert_sand = 1,
-		-- cactus 
+		cactus = 30, 
 		dry_shrub = 5,
 	-- Jungle --
-		-- jungletree
-		-- jungleleaves
+		jungletree = 16,
+		jungleleaves = 5,
 		junglegrass = 5,
-		-- junglesapling
+		junglesapling = 16,
 	-- Underground--
 		cobble = 1,
-		-- mossycobble
-		-- gravel
+		mossycobble = 110,
+		gravel = 55,
 		coal_lump = 55,
 		-- Precise Value: 57
 		iron_lump = 61,
@@ -42,18 +41,19 @@ local emcs = {
 		mese_crystal = 425,
 		-- Precise Value: 848
 		diamond = 976,
-		-- obsidian
-		-- nyancat
-		-- nyancat_rainbow
+		obsidian = 
+		nyancat = 3786750,
+		nyancat_rainbow = 3786750,
 	-- Exceptions --
-		-- wood
-		-- junglewood
-		-- stick
+		wood = 4,
+		junglewood = 4,
+		pinewood = 4,
+		stick = 1,
 	},
-	-- ["bucket"] = {
-	-- 	-- bucket_water
-	-- 	-- bucket_lava
-	-- },
+	["bucket"] = {
+		bucket_water = 275, 
+		bucket_lava = 
+	},
 	["farming"] = {
 		seed_wheat = 20,
 		seed_cotton = 35,
