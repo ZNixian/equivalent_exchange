@@ -38,7 +38,7 @@ local emcs = {
 		-- Precise Value (of lump): 442
 		gold_lump = 488,
 		-- Precise Value: 420
-		mese_crystal = 425,
+		mese_crystal = 423,
 		-- Precise Value: 848
 		diamond = 976,
 
@@ -87,15 +87,15 @@ end
  
 -- Add EMC values to raw materials.
 for modname, itemlist in pairs(emcs) do
-        for itemname, emcvalue in pairs(itemlist) do
-                minetest.override_item(modname..":"..itemname, {
-                    description = minetest.registered_items[modname..":"..itemname].description.."\nEMC Value: "..emcvalue,
-                    emc = emcvalue,
-                })             
-        end
+    for itemname, emcvalue in pairs(itemlist) do
+        minetest.override_item(modname..":"..itemname, {
+            description = minetest.registered_items[modname..":"..itemname].description.."\nEMC Value: "..emcvalue,
+            emc = emcvalue,
+        })             
+    end
 end
 
-for i=1,10 do
+for i = 1,10 do
 	for _, itemname in pairs(registered_items) do
 		if itemname ~= ""
 		  and itemname ~= ":"
@@ -105,26 +105,18 @@ for i=1,10 do
 
 			for _, recipe in pairs(minetest.get_all_craft_recipes(itemname)) do
 				local emcvalue = 0
-
-				if recipe.type == "cooking" and minetest.registered_items[recipe.items[1].emc] ~= nil then
-					emcvalue = minetest.registered_items[recipe.items[1]].emc * 1.5
-					-- table.insert(exceptions, itemname)
-
-				else
+				if recipe.type == "cooking" and minetest.registered_items[recipe.items[1]] ~= nil and minetest.registered_items[recipe.items[1]].emc then
+					emcvalue = (minetest.registered_items[recipe.items[1]].emc * 1.5)-- Change to cooktime eventually.
+					print(itemname, emcvalue)
+				elseif minetest.registered_items[recipe.output:split(" ")[1]].emc == nil then 
 					for _,item in pairs(recipe.items) do
-						if string.sub(item,1,string.len("group:"))=="group:" then
-							local current_emc = 0
-							for _,definition in pairs(minetest.registered_nodes) do 
-								if definition.groups[item] and definition.emc ~= nil then
-									if definition.emc < current_emc then
-										current_emc = definition.emc
-
-									elseif current_emc == 0 then
-										current_emc = definition.emc
-									end
+						if string.find(item, "group:") then
+							groupname = item:gsub("group:", "")
+							for _, groupitem in pairs(registered_items) do
+								if minetest.get_item_group(groupitem, groupname) == 1 and minetest.registered_items[groupitem].emc then
+									emcvalue = emcvalue + minetest.registered_items[groupitem].emc
 								end
 							end
-							emcvalue = current_emc
 						elseif minetest.registered_items[item] and minetest.registered_items[item].emc then
 							emcvalue = emcvalue + minetest.registered_items[item].emc
 						else
@@ -143,11 +135,14 @@ for i=1,10 do
 						emcvalue = emcvalue / craft_number
 					end
 				end
+				print(itemname, emcvalue)
 				local_emcs[itemname] = emcvalue
 			end
 		end
 	end
+	print (local_emcs["default:gold_ingot"])
 	for item, value in pairs(local_emcs) do
+		--print (item,value)
 		minetest.override_item(item, {
 			description = minetest.registered_items[item].description.."\nEMC Value: "..value,
 			emc = value,
@@ -155,3 +150,6 @@ for i=1,10 do
 	end
 	local_emcs = {}
 end
+
+
+
